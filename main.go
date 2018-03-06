@@ -98,6 +98,9 @@ func send_message(e Event, color string) error {
 	}
 	params.Attachments = []slack.Attachment{attachment}
 
+	// This parameter allows the bot to post to Slack as the Kubernetes user
+	params.AsUser = true
+
 	channelID, timestamp, err := api.PostMessage(os.Getenv("SLACK_CHANNEL"), "", params)
 	if err != nil {
 		fmt.Printf("%s\n", err)
